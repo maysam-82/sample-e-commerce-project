@@ -1,5 +1,5 @@
 import React from 'react';
-import Homepage from '../../pages/Homepage/Homepage';
+import Home from '../../pages/Home';
 import menuItems from '../../data/menuItems';
 import { Route, Switch } from 'react-router-dom';
 
@@ -17,11 +17,7 @@ class App extends React.Component {
 		return (
 			<div>
 				<Switch>
-					<Route
-						exact
-						path="/"
-						render={() => <Homepage menuItems={menuItems} />}
-					/>
+					<Route exact path="/" render={() => <Home menuItems={menuItems} />} />
 				</Switch>
 			</div>
 		);

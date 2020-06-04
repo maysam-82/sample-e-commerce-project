@@ -1,13 +1,13 @@
 import React from 'react';
-import classes from './homepage.module.scss';
+import classes from './home.module.scss';
 import MenuItems from '../../components/MenuItems/MenuItems';
 
-const Homepage = ({ menuItems }) => {
+const Home = ({ menuItems }) => {
 	return (
-		<div className={classes.homepage}>
+		<div className={classes.home}>
 			<MenuItems menuItems={menuItems} />
 		</div>
 	);
 };
 
-export default Homepage;
+export default Home;
