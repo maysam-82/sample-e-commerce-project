@@ -1,6 +1,6 @@
 ## Project Folder Structure:
 
-At this stage, we will have two folders:
+We will have following folders which will be updated accordingly:
 
 - `components`: Which contains all reusable components.
 - `containers`: Which contains components that handle components logics and states.
