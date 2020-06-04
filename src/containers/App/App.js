@@ -5,6 +5,7 @@ import shopData from '../../data/shop.data';
 import { Route, Switch } from 'react-router-dom';
 import Shop from '../../pages/Shop/Shop';
 import classes from './app.module.scss';
+import Header from '../../components/Header/Header';
 
 class App extends React.Component {
 	constructor(props) {
@@ -20,6 +21,7 @@ class App extends React.Component {
 		const { menuItems, shopData } = this.state;
 		return (
 			<div className={classes.appContainer}>
+				<Header />
 				<Switch>
 					<Route exact path="/" render={() => <Home menuItems={menuItems} />} />
 					<Route
