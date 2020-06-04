@@ -1,6 +1,7 @@
 import React from 'react';
 import Homepage from '../../pages/Homepage/Homepage';
 import menuItems from '../../data/menuItems';
+import { Route, Switch } from 'react-router-dom';
 
 class App extends React.Component {
 	constructor(props) {
@@ -15,7 +16,13 @@ class App extends React.Component {
 		const { menuItems } = this.state;
 		return (
 			<div>
-				<Homepage menuItems={menuItems} />
+				<Switch>
+					<Route
+						exact
+						path="/"
+						render={() => <Homepage menuItems={menuItems} />}
+					/>
+				</Switch>
 			</div>
 		);
 	}

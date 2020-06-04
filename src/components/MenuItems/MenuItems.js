@@ -4,8 +4,8 @@ import classes from './menuItems.module.scss';
 
 const MenuItems = ({ menuItems }) => {
 	function renderMenuItem() {
-		return menuItems.map(({ title, id, imageUrl, size }) => (
-			<MenuItem title={title} key={id} imageUrl={imageUrl} imageSize={size} />
+		return menuItems.map(({ id, ...menuItemProps }) => (
+			<MenuItem key={id} {...menuItemProps} />
 		));
 	}
 	return <div className={classes.directoryMenu}>{renderMenuItem()}</div>;
