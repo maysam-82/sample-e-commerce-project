@@ -1,4 +1,4 @@
-export const shopData = [
+export default [
 	{
 		id: 1,
 		title: 'Hats',
