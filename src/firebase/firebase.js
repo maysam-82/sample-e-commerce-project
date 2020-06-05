@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 // for storage
 import 'firebase/storage';
 // for auth
@@ -14,7 +14,7 @@ import 'firebase/auth';
 // 	appId: '',
 // };
 
-import { config } from '../../config';
+import { config } from '../config';
 
 firebase.initializeApp(config);
 
