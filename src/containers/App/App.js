@@ -32,7 +32,7 @@ function App() {
 
 	return (
 		<div className={classes.appContainer}>
-			<Header />
+			<Header currentUser={currentUser} />
 			<Switch>
 				<Route exact path="/" render={() => <Home menuItems={menuItems} />} />
 				<Route path="/shop" render={() => <Shop shopData={shopData} />} />

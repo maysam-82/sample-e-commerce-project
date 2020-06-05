@@ -40,10 +40,12 @@ export default function SignIn() {
 					label="password"
 					autoComplete="false"
 				/>
-				<CustomButton type="submit">Sign In</CustomButton>
-				<CustomButton onClick={signInWithGoogle}>
-					Sign in with Google
-				</CustomButton>
+				<div className={classes.buttons}>
+					<CustomButton type="submit">Sign In</CustomButton>
+					<CustomButton onClick={signInWithGoogle} isGoogleSignedIn>
+						Sign in with Google
+					</CustomButton>
+				</div>
 			</form>
 		</div>
 	);
