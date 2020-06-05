@@ -1,6 +1,6 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 // for storage
-import 'firebase/storage';
+import 'firebase/firestore';
 // for auth
 import 'firebase/auth';
 // Your web app's Firebase configuration located inside `web app` that has already been created.
