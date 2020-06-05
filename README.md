@@ -7,3 +7,4 @@ We will have following folders which will be updated accordingly:
 - `data`: Which contains some files with static data in.
 - `pages`: For all pages which are components but not used more than once.
 - `assets`: To add static files such as images, logo and so on to.
+- `firebase`: To use Authentication and Database services files.
