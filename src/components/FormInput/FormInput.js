@@ -13,6 +13,7 @@ export default function FormInput({
 				className={classes.formInput}
 				onChange={handleChange}
 				{...inputProps}
+				value={value}
 			/>
 			{label ? (
 				<label
