@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import classes from './signIn.module.scss';
-import FormInput from '../FormInput/FormInput';
-import CustomButton from '../CustomButton/CustomButton';
+import FormInput from '../FormInput';
+import CustomButton from '../CustomButton';
+import { signInWithGoogle } from '../../firebase/firebase';
 
 export default function SignIn() {
 	const [email, setEmail] = useState('');
@@ -40,6 +41,9 @@ export default function SignIn() {
 					autoComplete="false"
 				/>
 				<CustomButton type="submit">Sign In</CustomButton>
+				<CustomButton onClick={signInWithGoogle}>
+					Sign in with Google
+				</CustomButton>
 			</form>
 		</div>
 	);
