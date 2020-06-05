@@ -44,7 +44,6 @@ function App() {
 			authonAuthStateChanged();
 		};
 	}, [currentUserId]);
-	console.log(currentUserData);
 	return (
 		<div className={classes.appContainer}>
 			<Header currentUserData={currentUserData} />
