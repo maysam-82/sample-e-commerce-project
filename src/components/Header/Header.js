@@ -4,7 +4,7 @@ import { ReactComponent as Logo } from '../../assets/logo/original.svg';
 import { auth } from '../../firebase/firebase';
 import classes from './header.module.scss';
 
-export default function Header({ currentUser }) {
+export default function Header({ currentUserData }) {
 	return (
 		<div className={classes.header}>
 			<Link to="/" className={classes.logoContainer}>
@@ -17,7 +17,7 @@ export default function Header({ currentUser }) {
 				<Link to="/contact" className={classes.option}>
 					CONTACT
 				</Link>
-				{currentUser ? (
+				{currentUserData ? (
 					<div className={classes.option} onClick={() => auth.signOut()}>
 						SIGN OUT
 					</div>

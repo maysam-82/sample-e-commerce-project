@@ -18,6 +18,27 @@ import { config } from '../config';
 
 firebase.initializeApp(config);
 
+// take user data from auth library and store in database
+export async function createUserProfileDocument(userAuth, additionalData) {
+	if (!userAuth) return;
+	const userRef = firestore.doc(`users/${userAuth.uid}`);
+	const snapshot = await userRef.get();
+	if (!snapshot.exists) {
+		const { displayName, email } = userAuth;
+		const createdAt = new Date();
+		try {
+			await userRef.set({
+				displayName,
+				email,
+				createdAt,
+				...additionalData,
+			});
+		} catch (error) {
+			console.log('error creating user', error.message);
+		}
+	}
+	return userRef;
+}
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
