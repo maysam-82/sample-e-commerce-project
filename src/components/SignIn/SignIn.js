@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import classes from './signIn.module.scss';
 import FormInput from '../FormInput/FormInput';
+import CustomButton from '../CustomButton/CustomButton';
 
 export default function SignIn() {
 	const [email, setEmail] = useState('');
@@ -12,11 +13,15 @@ export default function SignIn() {
 			setPassword(value);
 		}
 	}
+	function handleSubmit(event) {
+		event.preventDefault();
+		console.log('submitted');
+	}
 	return (
 		<div className={classes.signIn}>
 			<h2>I already have an acount</h2>
 			<span>Sign in with your email and password</span>
-			<form>
+			<form onSubmit={handleSubmit}>
 				<FormInput
 					type="email"
 					value={email}
@@ -34,6 +39,7 @@ export default function SignIn() {
 					label="password"
 					autoComplete="false"
 				/>
+				<CustomButton type="submit">Sign In</CustomButton>
 			</form>
 		</div>
 	);
