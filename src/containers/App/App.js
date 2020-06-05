@@ -1,11 +1,12 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import Home from '../../pages/Home';
 import menuItems from '../../data/menuItems.data';
 import shopData from '../../data/shop.data';
-import { Route, Switch } from 'react-router-dom';
 import Shop from '../../pages/Shop/Shop';
-import classes from './app.module.scss';
 import Header from '../../components/Header/Header';
+import SignInSignUp from '../../pages/SignInSignUp';
+import classes from './app.module.scss';
 
 class App extends React.Component {
 	constructor(props) {
@@ -24,11 +25,8 @@ class App extends React.Component {
 				<Header />
 				<Switch>
 					<Route exact path="/" render={() => <Home menuItems={menuItems} />} />
-					<Route
-						exact
-						path="/shop"
-						render={() => <Shop shopData={shopData} />}
-					/>
+					<Route path="/shop" render={() => <Shop shopData={shopData} />} />
+					<Route path="/signin" component={SignInSignUp} />
 				</Switch>
 			</div>
 		);
