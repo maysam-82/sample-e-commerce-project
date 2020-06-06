@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Home from '../../pages/Home';
 import menuItems from '../../data/menuItems.data';
@@ -11,7 +11,7 @@ import { auth, createUserProfileDocument } from '../../firebase/firebase';
 import classes from './app.module.scss';
 import { setCurrentUser } from '../../actions/actionCreators';
 
-function App({ setCurrentUser }) {
+function App({ setCurrentUser, currentUserId }) {
 	useEffect(() => {
 		// `onAuthStateChanged` observer will Get the currently signed-in user. This is an open messaging system or listener between firebase and application. This connection always opens
 		// while application is mounted.
@@ -55,10 +55,21 @@ function App({ setCurrentUser }) {
 			<Switch>
 				<Route exact path="/" render={() => <Home menuItems={menuItems} />} />
 				<Route path="/shop" render={() => <Shop shopData={shopData} />} />
-				<Route path="/signin" component={SignInSignUp} />
+				<Route
+					path="/signin"
+					render={() =>
+						currentUserId ? <Redirect to="/" /> : <SignInSignUp />
+					}
+				/>
 			</Switch>
 		</div>
 	);
 }
 
-export default connect(null, { setCurrentUser })(App);
+const mapStateToProps = (state) => {
+	return {
+		currentUserId: state.users.currentUserId,
+	};
+};
+
+export default connect(mapStateToProps, { setCurrentUser })(App);
