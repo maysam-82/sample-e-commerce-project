@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Home from '../../pages/Home';
 import menuItems from '../../data/menuItems.data';
 import shopData from '../../data/shop.data';
@@ -8,10 +9,9 @@ import Header from '../../components/Header/Header';
 import SignInSignUp from '../../pages/SignInSignUp';
 import { auth, createUserProfileDocument } from '../../firebase/firebase';
 import classes from './app.module.scss';
+import { setCurrentUser } from '../../actions/actionCreators';
 
-function App() {
-	const [currentUserId, setCurrentUserId] = useState('');
-	const [currentUserData, setCurrentUserData] = useState(null);
+function App({ setCurrentUser }) {
 	useEffect(() => {
 		// `onAuthStateChanged` observer will Get the currently signed-in user. This is an open messaging system or listener between firebase and application. This connection always opens
 		// while application is mounted.
@@ -23,17 +23,22 @@ function App() {
 		// By the use of `onAuthStateChanged` we do not need to fetch
 		// manually everytime we are going to check if the status changed.
 		const authonAuthStateChanged = auth.onAuthStateChanged(async (userAuth) => {
+			let user = {
+				id: '',
+				data: {},
+			};
 			if (userAuth) {
 				const userRef = await createUserProfileDocument(userAuth);
 				userRef.onSnapshot((snapshot) => {
-					setCurrentUserId(snapshot.id);
-					setCurrentUserData({
-						...snapshot.data(),
-					});
+					user.id = snapshot.id;
+					user.data = { ...snapshot.data() };
+					setCurrentUser(user);
 				});
 			} else {
-				setCurrentUserId('');
-				setCurrentUserData(null);
+				user.id = '';
+				user.data = {};
+
+				setCurrentUser(user);
 			}
 		});
 
@@ -43,10 +48,10 @@ function App() {
 		return function cleanup() {
 			authonAuthStateChanged();
 		};
-	}, [currentUserId]);
+	});
 	return (
 		<div className={classes.appContainer}>
-			<Header currentUserData={currentUserData} />
+			<Header />
 			<Switch>
 				<Route exact path="/" render={() => <Home menuItems={menuItems} />} />
 				<Route path="/shop" render={() => <Shop shopData={shopData} />} />
@@ -56,4 +61,4 @@ function App() {
 	);
 }
 
-export default App;
+export default connect(null, { setCurrentUser })(App);
