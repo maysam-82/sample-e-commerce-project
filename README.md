@@ -8,3 +8,5 @@ We will have following folders which will be updated accordingly:
 - `pages`: For all pages which are components but not used more than once.
 - `assets`: To add static files such as images, logo and so on to.
 - `firebase`: To use Authentication and Database services files.
+- `actions`: Contains all actions/action creators.
+- `reducers`: Contains all reducers and root reducer which combines all reducers.
