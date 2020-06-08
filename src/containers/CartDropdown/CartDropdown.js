@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CustomButton from '../CustomButton';
-import CartItem from '../CartItem';
+import CustomButton from '../../components/CustomButton/CustomButton';
+import CartItem from '../../components/CartItem/CartItem';
 import classes from './cartDropdown.module.scss';
 
 function CartDropdown({ isShown, cartItems }) {

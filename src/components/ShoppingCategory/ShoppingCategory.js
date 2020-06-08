@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './shoppingCategory.module.scss';
-import CategoryItem from '../CategoryItem/CategoryItem';
+import CategoryItem from '../../containers/CategoryItem';
 
 export default function ShoppingCategory({ title, routeName, items }) {
 	function getTopFourItems(items) {

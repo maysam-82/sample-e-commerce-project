@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { ReactComponent as Logo } from '../../assets/logo/original.svg';
 import { auth } from '../../firebase/firebase';
 import classes from './header.module.scss';
-import CartIcon from '../CartIcon';
+import CartIcon from '../../components/CartIcon/CartIcon';
 import CartDropdown from '../CartDropdown/CartDropdown';
 
 function Header({ currentUserId }) {
