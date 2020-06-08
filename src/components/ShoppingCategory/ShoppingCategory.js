@@ -9,7 +9,7 @@ export default function ShoppingCategory({ title, routeName, items }) {
 	function renderCategory() {
 		const topFourItems = getTopFourItems(items);
 		return topFourItems.map(({ id, ...categoryItemProps }) => (
-			<CategoryItem {...categoryItemProps} />
+			<CategoryItem key={id} {...categoryItemProps} />
 		));
 	}
 	return (
