@@ -10,7 +10,6 @@ import CartDropdown from '../CartDropdown/CartDropdown';
 function Header({ currentUserId }) {
 	const [isCartDropdownShown, setIsCartDropdownShown] = useState(false);
 	function handleClick() {
-		console.log(isCartDropdownShown);
 		setIsCartDropdownShown(!isCartDropdownShown);
 	}
 	return (

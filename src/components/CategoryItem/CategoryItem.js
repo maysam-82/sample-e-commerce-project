@@ -5,8 +5,7 @@ import { addToCart } from '../../actions/actionCreators';
 import classes from './categoryItem.module.scss';
 
 function CategoryItem({ item, addToCart }) {
-	const { id, price, imageUrl, name } = item;
-	console.log(id);
+	const { price, imageUrl, name } = item;
 	return (
 		<div className={classes.categoryItem}>
 			<div className={classes.image}>
