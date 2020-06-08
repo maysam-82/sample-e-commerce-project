@@ -9,3 +9,10 @@ export const setCurrentUser = (user) => (dispatch) => {
 		payload: { ...user.data },
 	});
 };
+
+export const addToCart = (shoppingItem) => (dispatch) => {
+	dispatch({
+		type: actionTypes.ADD_ITEM_TO_CART,
+		payload: shoppingItem,
+	});
+};

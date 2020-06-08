@@ -1,8 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import CustomButton from '../CustomButton/CustomButton';
+import { addToCart } from '../../actions/actionCreators';
 import classes from './categoryItem.module.scss';
 
-export default function CategoryItem({ id, price, imageUrl, name }) {
+function CategoryItem({ item, addToCart }) {
+	const { id, price, imageUrl, name } = item;
+	console.log(id);
 	return (
 		<div className={classes.categoryItem}>
 			<div className={classes.image}>
@@ -12,7 +16,11 @@ export default function CategoryItem({ id, price, imageUrl, name }) {
 				<span className={classes.name}>{name}</span>
 				<span className={classes.price}>{price}</span>
 			</div>
-			<CustomButton colorInverted>ADD TO CART</CustomButton>
+			<CustomButton colorInverted onClick={() => addToCart(item)}>
+				ADD TO CART
+			</CustomButton>
 		</div>
 	);
 }
+
+export default connect(null, { addToCart })(CategoryItem);

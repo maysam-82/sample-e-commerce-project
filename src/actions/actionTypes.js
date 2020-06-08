@@ -1,2 +1,6 @@
+// User
 export const SET_CURRENT_USER_ID = 'SET_CURRENT_USER_ID';
 export const SET_CURRENT_USER_DATA = 'SET_CURRENT_USER_DATA';
+
+// Cart
+export const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART';

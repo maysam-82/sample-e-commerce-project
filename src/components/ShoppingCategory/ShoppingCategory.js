@@ -8,8 +8,8 @@ export default function ShoppingCategory({ title, routeName, items }) {
 	}
 	function renderCategory() {
 		const topFourItems = getTopFourItems(items);
-		return topFourItems.map(({ id, ...categoryItemProps }) => (
-			<CategoryItem key={id} {...categoryItemProps} />
+		return topFourItems.map((item) => (
+			<CategoryItem key={item.id} item={item} />
 		));
 	}
 	return (
