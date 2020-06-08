@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ReactComponent as Logo } from '../../assets/logo/original.svg';
 import { auth } from '../../firebase/firebase';
 import classes from './header.module.scss';
-import CartIcon from '../CartIcon/CartIcon';
+import CartIcon from '../CartIcon';
+import CartDropdown from '../CartDropdown/CartDropdown';
 
 function Header({ currentUserId }) {
+	const [isCartDropdownShown, setIsCartDropdownShown] = useState(false);
+	function handleClick() {
+		console.log(isCartDropdownShown);
+		setIsCartDropdownShown(!isCartDropdownShown);
+	}
 	return (
 		<div className={classes.header}>
 			<Link to="/" className={classes.logoContainer}>
@@ -28,8 +34,11 @@ function Header({ currentUserId }) {
 						SIGN IN
 					</Link>
 				)}
-				<CartIcon />
+				<div className={classes.option} onClick={handleClick}>
+					<CartIcon />
+				</div>
 			</div>
+			<CartDropdown isShown={isCartDropdownShown} />
 		</div>
 	);
 }
