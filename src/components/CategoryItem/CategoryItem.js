@@ -1,4 +1,5 @@
 import React from 'react';
+import CustomButton from '../CustomButton/CustomButton';
 import classes from './categoryItem.module.scss';
 
 export default function CategoryItem({ id, price, imageUrl, name }) {
@@ -11,6 +12,7 @@ export default function CategoryItem({ id, price, imageUrl, name }) {
 				<span className={classes.name}>{name}</span>
 				<span className={classes.price}>{price}</span>
 			</div>
+			<CustomButton colorInverted>ADD TO CART</CustomButton>
 		</div>
 	);
 }
