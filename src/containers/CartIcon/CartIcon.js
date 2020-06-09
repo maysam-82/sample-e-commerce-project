@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ReactComponent as ShoppingIcon } from '../../assets/icons/shopping_bag.svg';
+import { selectCartItemsCount } from '../../reducers/cart/cartSelectors';
 import classes from './cartIcon.module.scss';
 
 function CartIcon({ cartItemsCount }) {
@@ -12,14 +13,9 @@ function CartIcon({ cartItemsCount }) {
 	);
 }
 
-const mapStateToProps = ({ cart: { cartItems } }) => {
+const mapStateToProps = (state) => {
 	return {
-		// 0 as initial accumulator value
-		cartItemsCount: cartItems.reduce(
-			(accumulatedQuantity, cartItem) =>
-				accumulatedQuantity + cartItem.quantity,
-			0
-		),
+		cartItemsCount: selectCartItemsCount(state),
 	};
 };
 

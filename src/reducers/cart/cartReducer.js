@@ -1,5 +1,5 @@
-import * as actionTypes from '../actions/actionTypes';
-import { addQuantityBeforeAddItem } from './utilities/cartUtilities';
+import * as actionTypes from '../../actions/actionTypes';
+import { addQuantityBeforeAddItem } from '../utilities/cartUtilities';
 
 const INITIAL_STATE = {
 	cartItems: [],
