@@ -14,7 +14,13 @@ function CartDropdown({ cartItems }) {
 	}
 	return (
 		<div className={classes.cartDropdown}>
-			<div className={classes.cartItems}>{renderCartItems()}</div>
+			<div className={classes.cartItems}>
+				{cartItems.length ? (
+					renderCartItems()
+				) : (
+					<span className={classes.emptyMessage}>Your cart is empty.</span>
+				)}
+			</div>
 			<CustomButton>GO TO CHECKOUT</CustomButton>
 		</div>
 	);
