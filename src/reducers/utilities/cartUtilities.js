@@ -4,7 +4,7 @@ export function addQuantityBeforeAddItem(cartItems, newCartItem) {
 	);
 	if (hasSameItem) {
 		return cartItems.map((cartItem) =>
-			cartItems.id === newCartItem.id
+			cartItem.id === newCartItem.id
 				? { ...cartItem, quantity: cartItem.quantity + 1 }
 				: cartItem
 		);
