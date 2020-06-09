@@ -25,3 +25,14 @@ export const selectCartHidden = createSelector(
 	[selectCart],
 	(cart) => cart.isCartDropdownHidden
 );
+
+export const selectCartTotalCost = createSelector(
+	[selectCartItems],
+	(cartItems) =>
+		// 0 as initial accumulator value
+		cartItems.reduce(
+			(accumulatedQuantity, cartItem) =>
+				accumulatedQuantity + cartItem.quantity * cartItem.price,
+			0
+		)
+);

@@ -8,6 +8,7 @@ import shopData from '../../data/shop.data';
 import Shop from '../../pages/Shop';
 import Header from '../Header';
 import SignInSignUp from '../../pages/SignInSignUp';
+import Checkout from '../../pages/Checkout';
 import { auth, createUserProfileDocument } from '../../firebase/firebase';
 import { setCurrentUser } from '../../actions/actionCreators';
 import { selectCurrentUserId } from '../../reducers/user/userSelectors';
@@ -57,6 +58,7 @@ function App({ setCurrentUser, currentUserId }) {
 			<Switch>
 				<Route exact path="/" render={() => <Home menuItems={menuItems} />} />
 				<Route path="/shop" render={() => <Shop shopData={shopData} />} />
+				<Route exact path="/checkout" component={Checkout} />} />
 				<Route
 					path="/signin"
 					render={() =>
