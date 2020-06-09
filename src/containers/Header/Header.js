@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ReactComponent as Logo } from '../../assets/logo/original.svg';
 import { auth } from '../../firebase/firebase';
-import classes from './header.module.scss';
 import CartIcon from '../CartIcon';
 import CartDropdown from '../CartDropdown';
+import { displayCartDropdown } from '../../actions/actionCreators';
+import classes from './header.module.scss';
 
-function Header({ currentUserId }) {
-	const [isCartDropdownShown, setIsCartDropdownShown] = useState(false);
-	function handleClick() {
-		setIsCartDropdownShown(!isCartDropdownShown);
-	}
+function Header({ currentUserId, isCartDropdownHidden, displayCartDropdown }) {
 	return (
 		<div className={classes.header}>
 			<Link to="/" className={classes.logoContainer}>
@@ -33,17 +30,18 @@ function Header({ currentUserId }) {
 						SIGN IN
 					</Link>
 				)}
-				<div className={classes.option} onClick={handleClick}>
+				<div className={classes.option} onClick={displayCartDropdown}>
 					<CartIcon />
 				</div>
 			</div>
-			<CartDropdown isShown={isCartDropdownShown} />
+			{isCartDropdownHidden ? <CartDropdown /> : null}
 		</div>
 	);
 }
 const mapStateToProps = (state) => {
 	return {
 		currentUserId: state.users.currentUserId,
+		isCartDropdownHidden: state.cart.isCartDropdownHidden,
 	};
 };
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { displayCartDropdown })(Header);

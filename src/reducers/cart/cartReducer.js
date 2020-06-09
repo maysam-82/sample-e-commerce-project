@@ -3,6 +3,7 @@ import { addQuantityBeforeAddItem } from '../utilities/cartUtilities';
 
 const INITIAL_STATE = {
 	cartItems: [],
+	isCartDropdownHidden: false,
 };
 
 export default function cartReducer(state = INITIAL_STATE, action) {
@@ -13,7 +14,13 @@ export default function cartReducer(state = INITIAL_STATE, action) {
 				...state,
 				cartItems: addQuantityBeforeAddItem(state.cartItems, payload),
 			};
-
+		case actionTypes.SHOW_CART_DROPDOWN:
+			const currentDropdownVisibility = state.isCartDropdownHidden;
+			console.log(currentDropdownVisibility);
+			return {
+				...state,
+				isCartDropdownHidden: !currentDropdownVisibility,
+			};
 		default:
 			return state;
 	}

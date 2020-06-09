@@ -16,3 +16,9 @@ export const addToCart = (shoppingItem) => (dispatch) => {
 		payload: shoppingItem,
 	});
 };
+
+export const displayCartDropdown = () => (dispatch) => {
+	dispatch({
+		type: actionTypes.SHOW_CART_DROPDOWN,
+	});
+};

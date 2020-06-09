@@ -5,18 +5,18 @@ import CartItem from '../../components/CartItem/CartItem';
 import { selectCartItems } from '../../reducers/cart/cartSelectors';
 import classes from './cartDropdown.module.scss';
 
-function CartDropdown({ isShown, cartItems }) {
+function CartDropdown({ cartItems }) {
 	function renderCartItems() {
 		return cartItems.map((cartItem) => (
 			<CartItem key={cartItem.id} item={cartItem} />
 		));
 	}
-	return isShown ? (
+	return (
 		<div className={classes.cartDropdown}>
 			<div className={classes.cartItems}>{renderCartItems()}</div>
 			<CustomButton>GO TO CHECKOUT</CustomButton>
 		</div>
-	) : null;
+	);
 }
 
 const mapStateToProps = (state) => {
