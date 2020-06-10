@@ -3,8 +3,6 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Home from '../../pages/Home';
-import menuItems from '../../data/menuItems.data';
-import shopData from '../../data/shop.data';
 import Shop from '../../pages/Shop';
 import Header from '../Header';
 import SignInSignUp from '../../pages/SignInSignUp';
@@ -56,8 +54,8 @@ function App({ setCurrentUser, currentUserId }) {
 		<div className={classes.appContainer}>
 			<Header />
 			<Switch>
-				<Route exact path="/" render={() => <Home menuItems={menuItems} />} />
-				<Route path="/shop" render={() => <Shop shopData={shopData} />} />
+				<Route exact path="/" component={Home} />
+				<Route path="/shop" component={Shop} />
 				<Route exact path="/checkout" component={Checkout} />} />
 				<Route
 					path="/signin"

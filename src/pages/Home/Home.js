@@ -1,11 +1,11 @@
 import React from 'react';
 import classes from './home.module.scss';
-import MenuItems from '../../components/MenuItems/MenuItems';
+import MenuItems from '../../containers/MenuItems/MenuItems';
 
-const Home = ({ menuItems }) => {
+const Home = () => {
 	return (
 		<div className={classes.home}>
-			<MenuItems menuItems={menuItems} />
+			<MenuItems />
 		</div>
 	);
 };

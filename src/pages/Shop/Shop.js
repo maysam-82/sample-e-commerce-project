@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectShoppingData } from '../../reducers/shop/shopSelector';
 import ShoppingCategory from '../../components/ShoppingCategory';
 
-export default function Shop({ shopData }) {
+function Shop({ shopData }) {
 	function renderCategories() {
 		return shopData.map(({ id, ...caterogyProps }) => (
 			<ShoppingCategory key={id} {...caterogyProps} />
@@ -9,3 +12,9 @@ export default function Shop({ shopData }) {
 	}
 	return <div>{renderCategories()}</div>;
 }
+
+const mapStateToProps = createStructuredSelector({
+	shopData: selectShoppingData,
+});
+
+export default connect(mapStateToProps)(Shop);
