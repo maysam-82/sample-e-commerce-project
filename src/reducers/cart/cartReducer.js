@@ -16,7 +16,6 @@ export default function cartReducer(state = INITIAL_STATE, action) {
 			};
 		case actionTypes.SHOW_CART_DROPDOWN:
 			const currentDropdownVisibility = state.isCartDropdownHidden;
-			console.log(currentDropdownVisibility);
 			return {
 				...state,
 				isCartDropdownHidden: !currentDropdownVisibility,

@@ -6,10 +6,13 @@ import {
 	selectCartTotalCost,
 } from '../../reducers/cart/cartSelectors';
 import classes from './checkout.module.scss';
+import CheckoutItem from '../../components/CheckoutItem';
 
 function Checkout({ cartItems, totalCost }) {
 	function renderCartItems() {
-		return cartItems.map((cartItem) => cartItem.name);
+		return cartItems.map((cartItem) => (
+			<CheckoutItem cartItem={cartItem} key={cartItem.id} />
+		));
 	}
 	return (
 		<div className={classes.checkoutPage}>
