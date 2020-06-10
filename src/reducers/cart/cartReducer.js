@@ -2,6 +2,7 @@ import * as actionTypes from '../../actions/actionTypes';
 import {
 	addQuantityBeforeAddItem,
 	removeItemFromCarts,
+	decreaseQuantity,
 } from '../utilities/cartUtilities';
 
 const INITIAL_STATE = {
@@ -27,6 +28,11 @@ export default function cartReducer(state = INITIAL_STATE, action) {
 			return {
 				...state,
 				cartItems: removeItemFromCarts(state.cartItems, payload),
+			};
+		case actionTypes.DECREASE_FROM_CART:
+			return {
+				...state,
+				cartItems: decreaseQuantity(state.cartItems, payload),
 			};
 
 		default:

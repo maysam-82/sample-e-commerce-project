@@ -29,3 +29,10 @@ export const removeFromCart = (cartItemId) => (dispatch) => {
 		payload: cartItemId,
 	});
 };
+
+export const decreaseFromCart = (shoppingItem) => (dispatch) => {
+	dispatch({
+		type: actionTypes.DECREASE_FROM_CART,
+		payload: shoppingItem,
+	});
+};
