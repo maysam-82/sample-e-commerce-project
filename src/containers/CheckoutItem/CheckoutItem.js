@@ -1,8 +1,12 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import { removeFromCart } from '../../actions/actionCreators';
 import classes from './checkoutItem.module.scss';
 
-function CheckoutItem({ cartItem: { imageUrl, name, quantity, price } }) {
+function CheckoutItem({
+	cartItem: { imageUrl, name, quantity, price, id },
+	removeFromCart,
+}) {
 	return (
 		<div className={classes.checkoutItem}>
 			<div className={classes.imageContainer}>
@@ -11,9 +15,11 @@ function CheckoutItem({ cartItem: { imageUrl, name, quantity, price } }) {
 			<span className={classes.name}>{name}</span>
 			<span className={classes.quantity}>{quantity}</span>
 			<span className={classes.price}>{price}</span>
-			<span className={classes.removeButton}>&#10005;</span>
+			<span className={classes.removeButton} onClick={() => removeFromCart(id)}>
+				&#10005;
+			</span>
 		</div>
 	);
 }
 
-export default CheckoutItem;
+export default connect(null, { removeFromCart })(CheckoutItem);

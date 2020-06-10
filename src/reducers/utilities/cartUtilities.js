@@ -13,3 +13,7 @@ export function addQuantityBeforeAddItem(cartItems, newCartItem) {
 	// `quantity` value will be attached for the first time.
 	return [...cartItems, { ...newCartItem, quantity: 1 }];
 }
+
+export function removeItemFromCarts(cartItems, cartItemId) {
+	return cartItems.filter((cartItem) => cartItem.id !== cartItemId);
+}

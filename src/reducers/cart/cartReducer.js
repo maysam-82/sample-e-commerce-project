@@ -1,5 +1,8 @@
 import * as actionTypes from '../../actions/actionTypes';
-import { addQuantityBeforeAddItem } from '../utilities/cartUtilities';
+import {
+	addQuantityBeforeAddItem,
+	removeItemFromCarts,
+} from '../utilities/cartUtilities';
 
 const INITIAL_STATE = {
 	cartItems: [],
@@ -20,6 +23,12 @@ export default function cartReducer(state = INITIAL_STATE, action) {
 				...state,
 				isCartDropdownHidden: !currentDropdownVisibility,
 			};
+		case actionTypes.REMOVE_ITEM_FROM_CART:
+			return {
+				...state,
+				cartItems: removeItemFromCarts(state.cartItems, payload),
+			};
+
 		default:
 			return state;
 	}

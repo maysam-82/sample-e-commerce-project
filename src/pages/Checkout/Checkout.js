@@ -6,7 +6,7 @@ import {
 	selectCartTotalCost,
 } from '../../reducers/cart/cartSelectors';
 import classes from './checkout.module.scss';
-import CheckoutItem from '../../components/CheckoutItem';
+import CheckoutItem from '../../containers/CheckoutItem';
 
 function Checkout({ cartItems, totalCost }) {
 	function renderCartItems() {

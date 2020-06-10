@@ -22,3 +22,10 @@ export const displayCartDropdown = () => (dispatch) => {
 		type: actionTypes.SHOW_CART_DROPDOWN,
 	});
 };
+
+export const removeFromCart = (cartItemId) => (dispatch) => {
+	dispatch({
+		type: actionTypes.REMOVE_ITEM_FROM_CART,
+		payload: cartItemId,
+	});
+};
