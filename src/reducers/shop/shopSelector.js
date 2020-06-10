@@ -18,3 +18,9 @@ export const selectShoppingCollection = (collectionUrl) =>
 		// Using data normalization to get data efficiently.
 		(collections) => collections[collectionUrl]
 	);
+
+export const selectShoppingCollectionPreview = createSelector(
+	[selectShoppingData],
+	(collections) =>
+		Object.keys(collections).map((collectionKey) => collections[collectionKey])
+);
