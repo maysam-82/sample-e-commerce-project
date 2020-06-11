@@ -39,6 +39,21 @@ export async function createUserProfileDocument(userAuth, additionalData) {
 	}
 	return userRef;
 }
+
+// Creates Firebase collection and documents
+export const addCollectionAndDocuments = async (collectionKey, dataToAdd) => {
+	console.log(dataToAdd);
+	// Creates a Firebase collection using `collectionKey`. Firebase will return a collection ref object.
+	const collectionRef = firestore.collection(collectionKey);
+	const batch = firestore.batch();
+	for (let index = 0; index < dataToAdd.length; index++) {
+		const data = dataToAdd[index];
+		const newDocumentRef = collectionRef.doc();
+		batch.set(newDocumentRef, data);
+	}
+	await batch.commit();
+};
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
