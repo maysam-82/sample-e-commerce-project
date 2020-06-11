@@ -52,6 +52,23 @@ export const addCollectionAndDocuments = async (collectionKey, dataToAdd) => {
 	}
 	await batch.commit();
 };
+// converts data from native object located in db to usable one in front-end side.
+export const convertCollectionsInSnapshotToObject = (collections) => {
+	const transformedCollection = collections.docs.map((doc) => {
+		const { title, items } = doc.data();
+		return {
+			// `encodeURI` convert any strings that a URL can not handle to a version that a URL can read.
+			routeName: encodeURI(title.toLowerCase()),
+			id: doc.id,
+			title,
+			items,
+		};
+	});
+	return transformedCollection.reduce((accumulator, collection) => {
+		accumulator[collection.title.toLowerCase()] = collection;
+		return accumulator;
+	}, {});
+};
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();

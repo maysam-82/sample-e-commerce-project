@@ -36,3 +36,10 @@ export const decreaseFromCart = (shoppingItem) => (dispatch) => {
 		payload: shoppingItem,
 	});
 };
+
+export const updateCollections = (collections) => (dispatch) => {
+	dispatch({
+		type: actionTypes.UPDATE_COLLECTIONS,
+		payload: collections,
+	});
+};
