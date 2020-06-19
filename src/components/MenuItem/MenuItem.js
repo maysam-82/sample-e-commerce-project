@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from './menuItem.module.scss';
-import { withRouter } from 'react-router-dom';
+import history from '../../history';
 
-const MenuItem = ({ title, imageUrl, imageSize, history, match, linkUrl }) => {
+const MenuItem = ({ title, imageUrl, imageSize, linkUrl }) => {
 	let menuItemClass = [classes.menuItem];
 	if (imageSize === 'large') {
 		menuItemClass.push(classes.menuItemLarge);
@@ -10,7 +10,7 @@ const MenuItem = ({ title, imageUrl, imageSize, history, match, linkUrl }) => {
 	return (
 		<div
 			className={menuItemClass.join(' ')}
-			onClick={() => history.push(`${match.url}${linkUrl}`)}
+			onClick={() => history.push(`${linkUrl}`)}
 		>
 			<img src={imageUrl} className={classes.menuItemImage} alt={title} />
 			<div className={classes.content}>
@@ -21,4 +21,4 @@ const MenuItem = ({ title, imageUrl, imageSize, history, match, linkUrl }) => {
 	);
 };
 
-export default withRouter(MenuItem);
+export default MenuItem;

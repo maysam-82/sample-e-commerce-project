@@ -6,8 +6,9 @@ import thunk from 'redux-thunk';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import App from './containers/App';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import reducers from './reducers';
+import history from './history';
 import './index.css';
 
 const middlewares = [thunk];
@@ -20,11 +21,11 @@ const persistor = persistStore(store);
 
 ReactDOM.render(
 	<Provider store={store}>
-		<BrowserRouter>
+		<Router history={history}>
 			<PersistGate persistor={persistor}>
 				<App />
 			</PersistGate>
-		</BrowserRouter>
+		</Router>
 	</Provider>,
 	document.querySelector('#root')
 );

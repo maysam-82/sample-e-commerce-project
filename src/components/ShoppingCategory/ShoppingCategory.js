@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './shoppingCategory.module.scss';
 import CategoryItem from '../../containers/CategoryItem';
+import history from '../../history';
 
 export default function ShoppingCategory({ title, routeName, items }) {
 	function getTopFourItems(items) {
@@ -14,7 +15,12 @@ export default function ShoppingCategory({ title, routeName, items }) {
 	}
 	return (
 		<div className={classes.categoryContainer}>
-			<div className={classes.title}>{title}</div>
+			<div
+				className={classes.title}
+				onClick={() => history.push(`/shop/${routeName}`)}
+			>
+				{title}
+			</div>
 			<div className={classes.preview}>{renderCategory()}</div>
 		</div>
 	);
