@@ -6,16 +6,16 @@ import CategoryItem from '../../containers/CategoryItem/CategoryItem';
 import classes from './collection.module.scss';
 
 function Category({ collection }) {
-	const { title, items } = collection;
+	const { title, items } = collection || {};
 	function renderCollectionItems() {
 		return items.map((item) => <CategoryItem key={item.id} item={item} />);
 	}
-	return (
+	return collection ? (
 		<div className={classes.collection}>
 			<h2 className={classes.title}>{title}</h2>
 			<div className={classes.items}>{renderCollectionItems()}</div>
 		</div>
-	);
+	) : null;
 }
 
 const mapStateToProps = (state, ownProps) => ({

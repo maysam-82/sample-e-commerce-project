@@ -7,7 +7,7 @@ const selectShop = (state) => state.shop;
 // Create an output selector which uses `createSelector` and input selectors.
 export const selectShoppingData = createSelector(
 	[selectShop],
-	(shop) => shop.shoppingData
+	(shop) => shop.shoppingData || []
 );
 
 // Create an ouput selector which returns a collection of data according to url param. passed in route.

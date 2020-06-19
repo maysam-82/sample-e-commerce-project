@@ -1,7 +1,7 @@
 import * as actionTypes from '../../actions/actionTypes';
 
 const INITIAL_STATE = {
-	shoppingData: {},
+	shoppingData: null,
 };
 
 function shopReducer(state = INITIAL_STATE, action) {
