@@ -4,6 +4,8 @@ import 'firebase/firestore';
 // for auth
 import 'firebase/auth';
 // Your web app's Firebase configuration located inside `web app` that has already been created.
+// Inside src, create a file named `config.js`. and export a `config` object with the following properties
+// which can be got from firebase console.
 // {
 // 	apiKey: '',
 // 	authDomain: '',
