@@ -10,3 +10,4 @@ We will have following folders which will be updated accordingly:
 - `firebase`: To use Authentication and Database services files.
 - `actions`: Contains all actions/action creators.
 - `reducers`: Contains all reducers and root reducer which combines all reducers.
+- `hoc`: Contains all higher order components that contains the same logics which can be shared within components.
