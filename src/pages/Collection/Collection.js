@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectShoppingCollection } from '../../reducers/shop/shopSelector';
-import CategoryItem from '../../containers/CategoryItem/CategoryItem';
+import CategoryItem from '../../containers/CategoryItem';
+import withSpinner from '../../hoc/withSpinner/withSpinner';
 
 import classes from './collection.module.scss';
 
-function Category({ collection }) {
+function Category({ collection, match }) {
 	const { title, items } = collection || {};
 	function renderCollectionItems() {
 		return items.map((item) => <CategoryItem key={item.id} item={item} />);
@@ -25,4 +26,4 @@ const mapStateToProps = (state, ownProps) => ({
 	),
 });
 
-export default connect(mapStateToProps)(Category);
+export default withSpinner(connect(mapStateToProps)(Category));

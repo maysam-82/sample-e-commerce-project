@@ -1,25 +1,16 @@
 import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import CollectionOverview from '../../containers/CollectionOverview/CollectionOverview';
+import CollectionOverview from '../../containers/CollectionOverview';
 import Collection from '../Collection';
-import {
-	firestore,
-	convertCollectionsInSnapshotToObject,
-} from '../../firebase/firebase';
-import { updateCollections } from '../../actions/actionCreators';
+import { fetchCollections } from '../../actions/actionCreators';
 
 import classes from './shop.module.scss';
 
 // we have access to match object because in App component the Shop page is nested inside Route.
-function Shop({ match, updateCollections }) {
+function Shop({ match, fetchCollections }) {
 	useEffect(() => {
-		const collectionRef = firestore.collection('collections');
-		collectionRef.onSnapshot(async (snapshot) => {
-			const collections = convertCollectionsInSnapshotToObject(snapshot);
-			updateCollections(collections);
-		});
-		return () => {};
+		fetchCollections();
 	});
 	return (
 		<div className={classes.shopPage}>
@@ -30,4 +21,4 @@ function Shop({ match, updateCollections }) {
 	);
 }
 
-export default connect(null, { updateCollections })(Shop);
+export default connect(null, { fetchCollections })(Shop);

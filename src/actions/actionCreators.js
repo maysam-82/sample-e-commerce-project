@@ -1,4 +1,8 @@
 import * as actionTypes from './actionTypes';
+import {
+	firestore,
+	convertCollectionsInSnapshotToObject,
+} from '../firebase/firebase';
 export const setCurrentUser = (user) => (dispatch) => {
 	dispatch({
 		type: actionTypes.SET_CURRENT_USER_ID,
@@ -37,9 +41,28 @@ export const decreaseFromCart = (shoppingItem) => (dispatch) => {
 	});
 };
 
-export const updateCollections = (collections) => (dispatch) => {
-	dispatch({
-		type: actionTypes.UPDATE_COLLECTIONS,
-		payload: collections,
-	});
+const fetchCollectionsStart = () => {
+	return {
+		type: actionTypes.FETCH_COLLECTIONS_START,
+	};
+};
+const fetchCollectionsSuccess = (collections) => ({
+	type: actionTypes.FETCH_COLLECTIONS_SUCCESS,
+	payload: collections,
+});
+const fetchCollectionsFailed = (errorMessage) => ({
+	type: actionTypes.FETCH_COLLECTIONS_FAIL,
+	payload: errorMessage,
+});
+
+export const fetchCollections = () => (dispatch) => {
+	const collectionRef = firestore.collection('collections');
+	dispatch(fetchCollectionsStart());
+	collectionRef
+		.get()
+		.then((snapshot) => {
+			const collections = convertCollectionsInSnapshotToObject(snapshot);
+			dispatch(fetchCollectionsSuccess(collections));
+		})
+		.catch((error) => dispatch(fetchCollectionsFailed(error.message)));
 };
