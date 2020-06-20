@@ -14,25 +14,19 @@ export const setCurrentUser = (user) => (dispatch) => {
 	});
 };
 
-export const addToCart = (shoppingItem) => (dispatch) => {
-	dispatch({
-		type: actionTypes.ADD_ITEM_TO_CART,
-		payload: shoppingItem,
-	});
-};
+export const addToCart = (shoppingItem) => ({
+	type: actionTypes.ADD_ITEM_TO_CART,
+	payload: shoppingItem,
+});
 
-export const displayCartDropdown = () => (dispatch) => {
-	dispatch({
-		type: actionTypes.SHOW_CART_DROPDOWN,
-	});
-};
+export const displayCartDropdown = () => ({
+	type: actionTypes.SHOW_CART_DROPDOWN,
+});
 
-export const removeFromCart = (cartItemId) => (dispatch) => {
-	dispatch({
-		type: actionTypes.REMOVE_ITEM_FROM_CART,
-		payload: cartItemId,
-	});
-};
+export const removeFromCart = (cartItemId) => ({
+	type: actionTypes.REMOVE_ITEM_FROM_CART,
+	payload: cartItemId,
+});
 
 export const decreaseFromCart = (shoppingItem) => (dispatch) => {
 	dispatch({
