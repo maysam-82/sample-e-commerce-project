@@ -75,10 +75,9 @@ export const convertCollectionsInSnapshotToObject = (collections) => {
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 // We always want to trigger the google popup whenever we use `GoogleAuthProvider` for authentication and sign-in
-provider.setCustomParameters({ prompt: 'select_account' });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 export default firebase;

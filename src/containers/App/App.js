@@ -7,49 +7,16 @@ import Shop from '../../pages/Shop';
 import Header from '../Header';
 import SignInSignUp from '../../pages/SignInSignUp';
 import Checkout from '../../pages/Checkout';
-import { auth, createUserProfileDocument } from '../../firebase/firebase';
-import { setCurrentUser } from '../../actions/actionCreators';
-import { selectCurrentUserId } from '../../reducers/user/userSelectors';
+import { checkUserAuth } from '../../actions/actionCreators';
+import { selectCurrentUserData } from '../../reducers/user/userSelectors';
 import classes from './app.module.scss';
 
-function App({ setCurrentUser, currentUserId }) {
+function App({ user, checkUserAuth }) {
+	const { uid: userId } = user || {};
 	useEffect(() => {
-		// `onAuthStateChanged` observer will Get the currently signed-in user. This is an open messaging system or listener between firebase and application. This connection always opens
-		// while application is mounted.
-		// if (user) {
-		// User is signed in.
-		// } else {
-		// No user is signed in.
-		// }
-		// By the use of `onAuthStateChanged` we do not need to fetch
-		// manually everytime we are going to check if the status changed.
-		const authonAuthStateChanged = auth.onAuthStateChanged(async (userAuth) => {
-			let user = {
-				id: '',
-				data: {},
-			};
-			if (userAuth) {
-				const userRef = await createUserProfileDocument(userAuth);
-				userRef.onSnapshot((snapshot) => {
-					user.id = snapshot.id;
-					user.data = { ...snapshot.data() };
-					setCurrentUser(user);
-				});
-			} else {
-				user.id = '';
-				user.data = {};
-
-				setCurrentUser(user);
-			}
-		});
-
-		// We need to close this connection whenever we do not want it.
-		// If useEffect returns a function, React will run it when it is time to clean up.
-		// Acts like componentWillUnmount lifecycle hook.
-		return function cleanup() {
-			authonAuthStateChanged();
-		};
+		checkUserAuth();
 	});
+
 	return (
 		<div className={classes.appContainer}>
 			<Header />
@@ -59,9 +26,7 @@ function App({ setCurrentUser, currentUserId }) {
 				<Route exact path="/checkout" component={Checkout} />} />
 				<Route
 					path="/signin"
-					render={() =>
-						currentUserId ? <Redirect to="/" /> : <SignInSignUp />
-					}
+					render={() => (userId ? <Redirect to="/" /> : <SignInSignUp />)}
 				/>
 			</Switch>
 		</div>
@@ -69,7 +34,7 @@ function App({ setCurrentUser, currentUserId }) {
 }
 
 const mapStateToProps = createStructuredSelector({
-	currentUserId: selectCurrentUserId,
+	user: selectCurrentUserData,
 });
 
-export default connect(mapStateToProps, { setCurrentUser })(App);
+export default connect(mapStateToProps, { checkUserAuth })(App);

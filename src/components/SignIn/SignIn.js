@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import classes from './signIn.module.scss';
+import { connect } from 'react-redux';
 import FormInput from '../FormInput';
 import CustomButton from '../CustomButton';
-import { signInWithGoogle, auth } from '../../firebase/firebase';
+import {
+	signInWithGoogle,
+	signInWithEmailAndPassword,
+} from '../../actions/actionCreators';
+import classes from './signIn.module.scss';
 
-export default function SignIn() {
+function SignIn({ signInWithGoogle, signInWithEmailAndPassword }) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	function handleChange({ target: { name, value } }) {
@@ -14,15 +18,11 @@ export default function SignIn() {
 			setPassword(value);
 		}
 	}
-	async function handleSubmit(event) {
+	function handleSubmit(event) {
 		event.preventDefault();
-		try {
-			await auth.signInWithEmailAndPassword(email, password);
-			setPassword('');
-			setEmail('');
-		} catch (error) {
-			console.log(error);
-		}
+		signInWithEmailAndPassword(email, password);
+		setPassword('');
+		setEmail('');
 	}
 	return (
 		<div className={classes.signIn}>
@@ -48,7 +48,11 @@ export default function SignIn() {
 				/>
 				<div className={classes.buttons}>
 					<CustomButton type="submit">Sign In</CustomButton>
-					<CustomButton onClick={signInWithGoogle} isGoogleSignedIn>
+					<CustomButton
+						type="button"
+						onClick={signInWithGoogle}
+						isGoogleSignedIn
+					>
 						Sign in with Google
 					</CustomButton>
 				</div>
@@ -56,3 +60,13 @@ export default function SignIn() {
 		</div>
 	);
 }
+
+// mapStateToProps = state => {
+// 	return {
+
+// 	}
+// }
+
+export default connect(null, { signInWithGoogle, signInWithEmailAndPassword })(
+	SignIn
+);

@@ -3,15 +3,19 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { ReactComponent as Logo } from '../../assets/logo/original.svg';
-import { auth } from '../../firebase/firebase';
 import CartIcon from '../CartIcon';
 import CartDropdown from '../CartDropdown';
-import { displayCartDropdown } from '../../actions/actionCreators';
+import { displayCartDropdown, userSignout } from '../../actions/actionCreators';
 import { selectCartHidden } from '../../reducers/cart/cartSelectors';
-import { selectCurrentUserId } from '../../reducers/user/userSelectors';
+import { selectCurrentUserData } from '../../reducers/user/userSelectors';
 import classes from './header.module.scss';
 
-function Header({ currentUserId, isCartDropdownHidden, displayCartDropdown }) {
+function Header({
+	user,
+	isCartDropdownHidden,
+	displayCartDropdown,
+	userSignout,
+}) {
 	return (
 		<div className={classes.header}>
 			<Link to="/" className={classes.logoContainer}>
@@ -24,8 +28,8 @@ function Header({ currentUserId, isCartDropdownHidden, displayCartDropdown }) {
 				<Link to="/contact" className={classes.option}>
 					CONTACT
 				</Link>
-				{currentUserId ? (
-					<div className={classes.option} onClick={() => auth.signOut()}>
+				{user ? (
+					<div className={classes.option} onClick={() => userSignout()}>
 						SIGN OUT
 					</div>
 				) : (
@@ -42,7 +46,9 @@ function Header({ currentUserId, isCartDropdownHidden, displayCartDropdown }) {
 	);
 }
 const mapStateToProps = createStructuredSelector({
-	currentUserId: selectCurrentUserId,
+	user: selectCurrentUserData,
 	isCartDropdownHidden: selectCartHidden,
 });
-export default connect(mapStateToProps, { displayCartDropdown })(Header);
+export default connect(mapStateToProps, { displayCartDropdown, userSignout })(
+	Header
+);

@@ -1,9 +1,10 @@
 import React from 'react';
+import withSpinner from '../../hoc/withSpinner/withSpinner';
 import SignIn from '../../components/SignIn/SignIn';
-import classes from './signInSignUp.module.scss';
 import Signup from '../../components/Signup';
+import classes from './signInSignUp.module.scss';
 
-export default function SignInSignUp() {
+function SignInSignUp() {
 	return (
 		<div className={classes.signInSignUp}>
 			<SignIn />
@@ -11,3 +12,5 @@ export default function SignInSignUp() {
 		</div>
 	);
 }
+
+export default withSpinner(SignInSignUp);

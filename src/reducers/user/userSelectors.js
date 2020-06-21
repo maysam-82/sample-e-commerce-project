@@ -5,11 +5,11 @@ import { createSelector } from 'reselect';
 const selectUser = (state) => state.users;
 
 // Create an output selector which uses `createSelector` and input selectors.
-export const selectCurrentUserId = createSelector(
-	[selectUser],
-	(user) => user.currentUserId
-);
 export const selectCurrentUserData = createSelector(
 	[selectUser],
-	(user) => user.currentUserData
+	(user) => user.userData
+);
+export const selectIsFetchingUser = createSelector(
+	[selectUser],
+	(user) => user.isLoadingUser
 );
