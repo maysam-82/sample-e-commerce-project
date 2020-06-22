@@ -27,8 +27,7 @@ export const signInWithGoogle = () => (dispatch) => {
 	auth
 		.signInWithPopup(googleProvider)
 		.then(({ user }) => {
-			history.push('/');
-			dispatch(authSuccess(user));
+			createUserProfile(user, user.displayName);
 		})
 		.catch((error) => dispatch(authFailed(error.message)));
 };
@@ -61,13 +60,15 @@ export const signup = (email, password, displayName) => async (dispatch) => {
 	dispatch(authStart());
 	auth
 		.createUserWithEmailAndPassword(email, password)
-		.then(({ user }) =>
-			createUserProfileDocument(user, { displayName }).then((response) => {
-				dispatch(checkUserAuth());
-				history.push('/');
-			})
-		)
+		.then(({ user }) => createUserProfile(user, displayName))
 		.catch((error) => dispatch(authFailed(error.message)));
+};
+
+const createUserProfile = (user, displayName) => {
+	createUserProfileDocument(user, { displayName }).then((response) => {
+		checkUserAuth();
+		history.push('/');
+	});
 };
 
 export const checkUserAuth = () => (dispatch) => {
