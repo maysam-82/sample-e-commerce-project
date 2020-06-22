@@ -4,73 +4,79 @@ import {
 	convertCollectionsInSnapshotToObject,
 	googleProvider,
 	auth,
+	createUserProfileDocument,
 } from '../firebase/firebase';
 import history from '../history';
 
 // User action creators
 // action creators for google sign in
-export const googleSigninStart = (userEmailAndPassword) => ({
-	type: actionTypes.GOOGLE_SIGNIN_START,
-	payload: userEmailAndPassword,
+export const authStart = () => ({
+	type: actionTypes.AUTH_START,
 });
-export const googleSigninSuccess = (userPayload) => ({
-	type: actionTypes.GOOGLE_SIGNIN_SUCCESS,
+export const authSuccess = (userPayload) => ({
+	type: actionTypes.AUTH_SUCCESS,
 	payload: userPayload,
 });
-export const googleSigninFailed = (errorMessage) => ({
-	type: actionTypes.GOOGLE_SIGNIN_FAIL,
-	payload: errorMessage,
-});
-
-// action creators for signing in with email and password
-export const emailSigninStart = () => ({
-	type: actionTypes.EMAIL_SIGNIN_START,
-});
-export const emailSigninSuccess = (userPayload) => ({
-	type: actionTypes.EMAIL_SIGNIN_SUCCESS,
-	payload: userPayload,
-});
-export const emailSigninFailed = (errorMessage) => ({
-	type: actionTypes.EMAIL_SIGNIN_FAIL,
+export const authFailed = (errorMessage) => ({
+	type: actionTypes.AUTH_FAIL,
 	payload: errorMessage,
 });
 
 export const signInWithGoogle = () => (dispatch) => {
-	dispatch(googleSigninStart());
+	dispatch(authStart());
 	auth
 		.signInWithPopup(googleProvider)
 		.then(({ user }) => {
 			history.push('/');
-			dispatch(googleSigninSuccess(user));
+			dispatch(authSuccess(user));
 		})
-		.catch((error) => dispatch(googleSigninFailed(error.message)));
+		.catch((error) => dispatch(authFailed(error.message)));
 };
 
 export const signInWithEmailAndPassword = (email, password) => (dispatch) => {
-	dispatch(emailSigninStart());
+	dispatch(authStart());
 	auth
 		.signInWithEmailAndPassword(email, password)
 		.then(({ user }) => {
 			history.push('/');
-			dispatch(emailSigninSuccess(user));
+			dispatch(authSuccess(user));
 		})
-		.catch((error) => dispatch(emailSigninFailed(error.message)));
+		.catch((error) => dispatch(authFailed(error.message)));
 };
 
 export const userSignout = () => (dispatch) => {
-	auth.signOut();
-	dispatch({
-		type: actionTypes.USER_SIGN_OUT,
-	});
+	auth
+		.signOut()
+		.then((response) =>
+			dispatch({
+				type: actionTypes.USER_SIGN_OUT_SUCCESS,
+			})
+		)
+		.catch((error) =>
+			dispatch({ type: actionTypes.USER_SIGN_OUT_FAIL, payload: error.message })
+		);
+};
+
+export const signup = (email, password, displayName) => async (dispatch) => {
+	dispatch(authStart());
+	auth
+		.createUserWithEmailAndPassword(email, password)
+		.then(({ user }) =>
+			createUserProfileDocument(user, { displayName }).then((response) => {
+				dispatch(checkUserAuth());
+				history.push('/');
+			})
+		)
+		.catch((error) => dispatch(authFailed(error.message)));
 };
 
 export const checkUserAuth = () => (dispatch) => {
-	dispatch(googleSigninStart());
+	dispatch(authStart());
 	auth.onAuthStateChanged(async (user) => {
 		if (user) {
-			await dispatch(googleSigninSuccess(user));
+			await dispatch(authSuccess(user));
 		} else {
-			dispatch(googleSigninFailed('User is not logged in'));
+			dispatch(authFailed('User is not logged in'));
 			history.push('/');
 		}
 	});

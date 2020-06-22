@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import FormInput from '../FormInput/FormInput';
 import CustomButton from '../CustomButton/CustomButton';
-import { auth, createUserProfileDocument } from '../../firebase/firebase';
+// import { auth, createUserProfileDocument } from '../../firebase/firebase';
+import { signup } from '../../actions/actionCreators';
 import classes from './signup.module.scss';
 
-export default function Signup() {
+function Signup({ signup }) {
 	const [signUpData, setSignUpData] = useState({
 		displayName: '',
 		email: '',
@@ -14,29 +16,21 @@ export default function Signup() {
 	function handleChange({ target: { name, value } }) {
 		setSignUpData({ ...signUpData, [name]: value });
 	}
-	async function handleSubmit(event) {
+	function handleSubmit(event) {
 		const { displayName, email, password, confirmPassword } = signUpData;
 		event.preventDefault();
 		if (password !== confirmPassword) {
 			alert('passwords do not match');
 			return;
 		}
-		try {
-			const { user } = await auth.createUserWithEmailAndPassword(
-				email,
-				password
-			);
-			await createUserProfileDocument(user, { displayName });
-			setSignUpData({
-				...signUpData,
-				displayName: '',
-				email: '',
-				password: '',
-				confirmPassword: '',
-			});
-		} catch (error) {
-			console.log(error);
-		}
+		signup(email, password, displayName);
+		setSignUpData({
+			...signUpData,
+			displayName: '',
+			email: '',
+			password: '',
+			confirmPassword: '',
+		});
 	}
 	const { displayName, email, password, confirmPassword } = signUpData;
 	return (
@@ -85,3 +79,5 @@ export default function Signup() {
 		</div>
 	);
 }
+
+export default connect(null, { signup })(Signup);
