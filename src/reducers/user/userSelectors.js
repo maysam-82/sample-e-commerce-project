@@ -13,3 +13,7 @@ export const selectIsFetchingUser = createSelector(
 	[selectUser],
 	(user) => user.isLoadingUser
 );
+export const selectIsAuthUser = createSelector(
+	[selectUser],
+	(user) => user.isLoadingAuth
+);

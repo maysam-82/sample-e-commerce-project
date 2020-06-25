@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectShoppingCollectionPreview } from '../../reducers/shop/shopSelector';
 import ShoppingCategory from '../../components/ShoppingCategory/ShoppingCategory';
-import withSpinner from '../../hoc/withSpinner/withSpinner';
-
 import classes from './collectionOverview.module.scss';
 
 function CollectionOverview({ collections }) {
@@ -23,4 +21,4 @@ const mapStateToProps = createStructuredSelector({
 	collections: selectShoppingCollectionPreview,
 });
 
-export default withSpinner(connect(mapStateToProps)(CollectionOverview));
+export default connect(mapStateToProps)(CollectionOverview);

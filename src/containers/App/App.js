@@ -8,17 +8,21 @@ import Header from '../Header';
 import SignInSignUp from '../../pages/SignInSignUp';
 import Checkout from '../../pages/Checkout';
 import { checkUserAuth } from '../../actions/actionCreators';
-import { selectCurrentUserData } from '../../reducers/user/userSelectors';
+import {
+	selectCurrentUserData,
+	selectIsAuthUser,
+} from '../../reducers/user/userSelectors';
+import Spinner from '../../components/Spinner';
 import classes from './app.module.scss';
 
-function App({ user, checkUserAuth }) {
+function App({ user, checkUserAuth, isLoading }) {
 	const { uid: userId } = user || {};
 	useEffect(() => {
 		checkUserAuth();
-	});
-
+	}, [checkUserAuth]);
 	return (
 		<div className={classes.appContainer}>
+			<Spinner text="User Authorization" isLoading={isLoading} />
 			<Header />
 			<Switch>
 				<Route exact path="/" component={Home} />
@@ -35,6 +39,7 @@ function App({ user, checkUserAuth }) {
 
 const mapStateToProps = createStructuredSelector({
 	user: selectCurrentUserData,
+	isLoading: selectIsAuthUser,
 });
 
 export default connect(mapStateToProps, { checkUserAuth })(App);

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { selectShoppingCollection } from '../../reducers/shop/shopSelector';
 import CategoryItem from '../../containers/CategoryItem';
-import withSpinner from '../../hoc/withSpinner/withSpinner';
 
 import classes from './collection.module.scss';
 
@@ -26,4 +25,4 @@ const mapStateToProps = (state, ownProps) => ({
 	),
 });
 
-export default withSpinner(connect(mapStateToProps)(Category));
+export default connect(mapStateToProps)(Category);

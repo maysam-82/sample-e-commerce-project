@@ -61,12 +61,6 @@ function SignIn({ signInWithGoogle, signInWithEmailAndPassword }) {
 	);
 }
 
-// mapStateToProps = state => {
-// 	return {
-
-// 	}
-// }
-
 export default connect(null, { signInWithGoogle, signInWithEmailAndPassword })(
 	SignIn
 );
