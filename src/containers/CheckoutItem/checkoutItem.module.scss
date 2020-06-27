@@ -43,3 +43,12 @@
 		cursor: pointer;
 	}
 }
+
+@media screen and (max-width: 800px) {
+	.checkoutItem {
+		width: 100%;
+		.price {
+			padding-left: 20px;
+		}
+	}
+}

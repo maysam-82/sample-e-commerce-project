@@ -24,3 +24,22 @@
 		}
 	}
 }
+
+@media screen and (max-width: 800px) {
+	.header {
+		margin-bottom: 10px;
+		height: 50px;
+		padding-top: 10px;
+		.logoContainer {
+			padding: 0;
+			svg {
+				height: 100%;
+				display: block;
+				margin: 0 auto;
+			}
+		}
+		.options {
+			width: calc(100% - 70px);
+		}
+	}
+}

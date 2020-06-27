@@ -72,3 +72,38 @@
 		}
 	}
 }
+
+@media screen and (max-width: 800px) {
+	.categoryItem {
+		width: 46%;
+		display: flex;
+		flex-direction: column;
+		height: 350px;
+		align-items: center;
+		position: relative;
+		margin-left: 4%;
+		margin-right: 4%;
+		&:first-child {
+			margin-left: 0;
+		}
+		&:nth-child(2n) {
+			margin-right: 0;
+		}
+		&:nth-child(2n + 1) {
+			margin-left: 0;
+		}
+		&:hover {
+			.image {
+				opacity: unset;
+			}
+			button {
+				opacity: unset;
+			}
+		}
+		button {
+			opacity: 1;
+			display: block;
+			border: none !important;
+		}
+	}
+}

@@ -13,5 +13,17 @@
 	.preview {
 		display: flex;
 		justify-content: space-between;
+		flex-wrap: nowrap;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.categoryContainer {
+		.title {
+			margin-bottom: 10px;
+		}
+		.preview {
+			flex-wrap: wrap;
+		}
 	}
 }

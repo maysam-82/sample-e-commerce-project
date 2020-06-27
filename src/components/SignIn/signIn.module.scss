@@ -2,11 +2,33 @@
 	width: 380px;
 	display: flex;
 	flex-direction: column;
+	padding-bottom: 0;
+	margin-bottom: 0;
+	border-bottom: none;
 	.title {
 		margin: 10px 0;
 	}
 	.buttons {
 		display: flex;
 		justify-content: space-between;
+		flex-direction: row;
+	}
+}
+@media screen and (max-width: 800px) {
+	.signIn {
+		width: 100%;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 10px;
+		form {
+			.buttons {
+				flex-direction: column;
+				button {
+					&:first-child {
+						margin-bottom: 10px;
+					}
+				}
+			}
+		}
 	}
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import {
@@ -33,7 +33,7 @@ function Checkout({ cartItems, totalCost }) {
 					<span>REMOVE</span>
 				</div>
 			</div>
-			<div>{renderCartItems()}</div>
+			<Fragment>{renderCartItems()}</Fragment>
 			<span className={classes.total}>TOTAL: {totalCost}</span>
 		</div>
 	);

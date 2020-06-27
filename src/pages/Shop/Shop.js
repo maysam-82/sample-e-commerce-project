@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -8,20 +8,18 @@ import Collection from '../Collection';
 import CollectionOverview from '../../containers/CollectionOverview';
 import Spinner from '../../components/Spinner';
 
-import classes from './shop.module.scss';
-
 // we have access to match object because in App component the Shop page is nested inside Route.
 function Shop({ match, fetchCollections, isLoading }) {
 	useEffect(() => {
 		fetchCollections();
 	}, [fetchCollections]);
 	return (
-		<div className={classes.shopPage}>
+		<Fragment>
 			<Spinner text="Fetching Collections" isLoading={isLoading} />
 			<Route exact path={`${match.path}`} component={CollectionOverview} />
 			{/* Adding nested routes */}
 			<Route path={`${match.path}/:collectionId`} component={Collection} />
-		</div>
+		</Fragment>
 	);
 }
 
